@@ -1,11 +1,41 @@
 <html>
     <head>
         <title>Sample Website</title>
+        <style>
+            body {
+                background-color: #f0f8ff;
+            }
+            h1 {
+                text-shadow: 2px 2px #c0c0c0;
+            }
+            button {
+                background-color: navy;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            button:hover {
+                background-color: darkblue;
+            }
+            footer {
+                margin-top: 50px;
+                font-size: 12px;
+                color: gray;
+            }
+        </style>
     </head>
     <body style="text-align:center;font-family:Verdana;margin:1%;">
         <h1 style="color:navy">Welcome to Our Website!</h1>
         <hr>
         <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
         <h2>Website Version: 3.0</h2>
+        <button onclick="alert('Thank you for visiting!')">Click Me!</button>
+        <footer>
+            &copy; 2024 Sample Company. All rights reserved.
+        </footer>
     </body>
 </html>
