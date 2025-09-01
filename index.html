@@ -8,7 +8,7 @@
             h1 {
                 text-shadow: 2px 2px #c0c0c0;
             }
-            button {
+            button, input[type="submit"] {
                 background-color: navy;
                 color: white;
                 border: none;
@@ -18,8 +18,31 @@
                 border-radius: 5px;
                 margin-top: 20px;
             }
-            button:hover {
+            button:hover, input[type="submit"]:hover {
                 background-color: darkblue;
+            }
+            form {
+                margin-top: 40px;
+                display: inline-block;
+                text-align: left;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            label {
+                display: block;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-family: Verdana;
+                font-size: 14px;
             }
             footer {
                 margin-top: 50px;
@@ -34,6 +57,30 @@
         <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
         <h2>Website Version: 3.0</h2>
         <button onclick="alert('Thank you for visiting!')">Click Me!</button>
+
+        <!-- 🌟 Contact Form Starts Here -->
+        <form>
+            <h3 style="color:navy;text-align:center;">Contact Us</h3>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="topic">Topic:</label>
+            <select id="topic" name="topic">
+                <option value="general">General Inquiry</option>
+                <option value="support">Support</option>
+                <option value="feedback">Feedback</option>
+            </select>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+        <!-- 🌟 Contact Form Ends Here -->
+
         <footer>
             &copy; 2024 Sample Company. All rights reserved.
         </footer>
