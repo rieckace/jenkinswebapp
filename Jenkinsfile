@@ -1,53 +1,47 @@
 pipeline {
   agent any
 
-  environment {
-    DEPLOY_SERVER = "ubuntu@<TARGET-EC2-IP>"
-    SSH_KEY = credentials('deploy-key')  // You’ll add this in Jenkins credentials
-  }
-
   stages {
-
     stage('Checkout Code') {
       steps {
-        echo "Cloning GitHub repository..."
+        echo "📦 Cloning GitHub repository..."
         git branch: 'main', url: 'https://github.com/rieckace/jenkinswebapp.git'
       }
     }
 
     stage('Build') {
       steps {
-        echo "Installing dependencies..."
-        sh 'npm install'
+        echo "⚙️ Build stage: (No build needed for static HTML site)"
+        sh 'echo "No build steps required."'
       }
     }
 
     stage('Test') {
       steps {
-        echo "Running tests..."
-        sh 'npm test'
+        echo "🧪 Running tests (skipping for static HTML)..."
+        sh 'echo "No tests defined."'
       }
     }
 
-    stage('Deploy') {
+    stage('Deploy to Nginx') {
       steps {
-        echo "Deploying application to EC2..."
-        sshagent (credentials: ['deploy-key']) {
-          sh '''
-            scp -o StrictHostKeyChecking=no -r * ${DEPLOY_SERVER}:/var/www/html/
-          '''
-        }
+        echo "🚀 Deploying files to Nginx web directory..."
+        // Remove old files and copy new ones
+        sh '''
+          sudo rm -rf /var/www/html/*
+          sudo cp -r * /var/www/html/
+          sudo systemctl restart nginx
+        '''
       }
     }
   }
 
   post {
     success {
-      echo "✅ Deployment successful!"
+      echo "✅ Deployment successful! Visit http://<YOUR-EC2-PUBLIC-IP>"
     }
     failure {
-      echo "❌ Build failed. Check Jenkins logs."
+      echo "❌ Deployment failed. Check Jenkins logs for details."
     }
   }
 }
-
