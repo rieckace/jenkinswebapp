@@ -39,6 +39,7 @@ pipeline {
       sudo systemctl restart nginx
       echo "✅ Deployment complete at $DEPLOY_TIME" | sudo tee /var/www/html/deploy.log
     '''
+    }
   }
 } // ✅ closes stages
 
