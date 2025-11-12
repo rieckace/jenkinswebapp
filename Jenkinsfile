@@ -1,41 +1,3 @@
-// pipeline {
-//     agent any
-
-//     environment {
-//         IMAGE_NAME = "simple-webapp"
-//         CONTAINER_NAME = "webapp-container"
-//     }
-
-//     stages {
-//         stage('Checkout Code') {
-//             steps {
-//                 git branch: 'main', url: 'https://github.com/rieckace/jenkinswebapp.git'
-//             }
-//         }
-
-//         stage('Build Docker Image') {
-//             steps {
-//                 script {
-//                     sh "docker build -t ${IMAGE_NAME}:latest ."
-//                 }
-//             }
-//         }
-
-//         stage('Deploy Container') {
-//             steps {
-//                 script {
-//                     // Stop and remove old container if running
-//                     sh """
-//                     docker rm -f ${CONTAINER_NAME} || true
-//                     docker run -d --name ${CONTAINER_NAME} -p 80:80 ${IMAGE_NAME}:latest
-//                     """
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
 pipeline {
   agent any
 
@@ -49,7 +11,7 @@ pipeline {
     stage('Checkout Code') {
       steps {
         echo "Cloning GitHub repository..."
-        git branch: 'main', url: 'https://github.com/<your-username>/<your-repo>.git'
+        git branch: 'main', url: 'https://github.com/rieckace/jenkinswebapp.git'
       }
     }
 
