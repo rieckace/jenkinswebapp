@@ -24,17 +24,17 @@ pipeline {
     }
 
     stage('Deploy to Nginx') {
-      steps {
-        echo "🚀 Deploying files to Nginx web directory..."
-        // Remove old files and copy new ones
-        sh '''
-          sudo rm -rf /var/www/html/*
-          sudo cp -r * /var/www/html/
-          sudo systemctl restart nginx
-        '''
-      }
-    }
+  steps {
+    echo "🚀 Deploying files to Nginx web directory..."
+    sh '''
+      sudo rm -rf /var/www/html/*
+      sudo cp -r * /var/www/html/
+      sudo chown -R www-data:www-data /var/www/html
+      sudo chmod -R 755 /var/www/html
+      sudo systemctl restart nginx
+    '''
   }
+}
 
   post {
     success {
